@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
-public class QuestdbSink {
+public class QuestdbSink implements AutoCloseable{
     private final CairoEngine engine;
     private final SqlExecutionContextImpl ctx;
     private final int batch;
@@ -81,4 +81,9 @@ public class QuestdbSink {
 
     }
 
+    @Override
+    public void close() {
+        this.engine.close();
+        System.out.println(">>>>>>>>>>>>>QuestDb close");
+    }
 }
